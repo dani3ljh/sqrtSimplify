@@ -2,19 +2,14 @@
 #include <stdlib.h>
 #include "sqrt.h"
 
-struct SquareRoot {
-    int coeficient;
-    int radicand;
-};
-
 void simplifySqrt(struct SquareRoot *squareRoot) {
-    int d = 2;
-    while (d * d <= squareRoot->radicand) {
-        if (squareRoot->radicand % (d * d) == 0) {
-            squareRoot->radicand /= d * d;
-            squareRoot->coeficient *= d;
+    int i = 2;
+    while (i * i <= squareRoot->radicand) {
+        if (squareRoot->radicand % (i * i) == 0) {
+            squareRoot->radicand /= i * i;
+            squareRoot->coeficient *= i;
         } else {
-            d++;
+            i++;
         }
     }
 }
@@ -24,7 +19,7 @@ struct SquareRoot *simplifyRadicand(int radicand) {
     out->coeficient = 1;
     out->radicand = radicand;
 
-    simplify(out);
+    simplifySqrt(out);
 
     return out; 
 }
@@ -38,7 +33,7 @@ void printSqrt(struct SquareRoot *squareRoot) {
         return;
     }
     if (coeficient != 1) {
-        pritnf("%d", coeficient)
+        printf("%d", coeficient);
     }
     if (radicand < 0) {
         printf("isqrt(%d)", -radicand);
